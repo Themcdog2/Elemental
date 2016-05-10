@@ -12,8 +12,8 @@ public class DrawPanel extends JPanel{
 	
 	@Override
 	public void paint(Graphics g){
-		for(int i = 0; i < Main.getObjects().size(); i++){
-			Main.getObjects().get(i).draw(g);
+		for(int i = 0; i < Main.getGameObjects().size(); i++){
+			Main.getGameObjects().get(i).draw(g);
 		}
 	}
 
