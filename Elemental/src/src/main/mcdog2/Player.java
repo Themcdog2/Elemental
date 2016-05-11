@@ -19,8 +19,8 @@ public class Player extends GameObject{
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
-		g.drawImage(image, x, y, null);
-		g.fillRect(0, 0, 10, 10);
+		g.drawImage(image, x, y, width, height, null);
+		//g.fillRect(0, 0, 10, 10);
 	}
 
 	@Override
