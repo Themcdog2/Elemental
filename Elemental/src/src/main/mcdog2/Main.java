@@ -10,8 +10,8 @@ import javax.swing.JFrame;
 
 public class Main {
 	
-	public static int SCREEN_WIDTH = 800;
-	public static int SCREEN_HEIGHT = 800;
+	public static int SCREEN_WIDTH = 900;
+	public static int SCREEN_HEIGHT = 600;
 	static JFrame frame;
 	static Canvas canvas;
 	
