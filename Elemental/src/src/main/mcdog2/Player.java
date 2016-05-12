@@ -2,6 +2,7 @@ package src.main.mcdog2;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.util.ArrayList;
 
 public class Player extends GameObject{
 
@@ -26,7 +27,19 @@ public class Player extends GameObject{
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
+		if(checkForCollision(Main.levels.get(0).getGameObjects()) == null){
+			y++;
+		}
 		
+	}
+	
+	private GameObject checkForCollision(ArrayList<GameObject> gameObjects){
+		for(GameObject e : gameObjects){
+			if(this.intersects(e.getX(), e.getY(), e.getWidth(), e.getHeight())){
+				return e;
+			}
+		}
+		return null;
 	}
 
 }

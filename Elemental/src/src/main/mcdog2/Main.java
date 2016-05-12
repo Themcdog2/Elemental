@@ -2,6 +2,7 @@ package src.main.mcdog2;
 
 
 import java.awt.Canvas;
+import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.util.ArrayList;
@@ -16,8 +17,10 @@ public class Main {
 	static Canvas canvas;
 	
 
-	
+	static State state = State.MAINMENU;
 	static private ArrayList<GameObject> obj;
+	static public ArrayList<Level> levels;
+	
 	
 	
 	
@@ -33,6 +36,9 @@ public class Main {
 		Player p = new Player(0, 0, 50, 50, Toolkit.getDefaultToolkit().getImage("tempstick.jpg"));
 		addGameObject(p);
 		GameLoop gl = new GameLoop();
+		levels = new ArrayList<Level>();
+		levels.add(new Level("Test level"));
+		levels.get(0).addGameObject(new Floor(0, SCREEN_HEIGHT - 50, SCREEN_WIDTH, 50));
 	}
 	
 	public static ArrayList<GameObject> getGameObjects(){

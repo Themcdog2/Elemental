@@ -25,8 +25,12 @@ public class DrawPanel extends JPanel implements MouseListener{
 			Main.getGameObjects().get(i).draw(g);
 		}
 		
-		if(!(mainmenu.getHidden())){
+		if(Main.state == State.MAINMENU){
 		mainmenu.drawMenu(g);
+		}else{
+			for(Level e : Main.levels){
+				e.renderObjects(g);
+			}
 		}
 	}
 
@@ -65,8 +69,11 @@ public class DrawPanel extends JPanel implements MouseListener{
 	private void checkMainMenuClicks(Point p){
 		if(mainmenu.buttonClicked(p, "startButton")){
 			mainmenu.setHidden(true);
+			Main.state = State.LEVELSELECT;
 		}
-		mainmenu.buttonClicked(p, "optionButton");
+		if(mainmenu.buttonClicked(p, "optionButton")){
+			Main.state = State.OPTIONMENU;
+		}
 		
 		if(mainmenu.buttonClicked(p, "exitButton")){
 			System.exit(0);
