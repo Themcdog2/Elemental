@@ -38,7 +38,10 @@ public class Main {
 		GameLoop gl = new GameLoop();
 		levels = new ArrayList<Level>();
 		levels.add(new Level("Test level"));
-		levels.get(0).addGameObject(new Floor(0, SCREEN_HEIGHT - 50, SCREEN_WIDTH, 50));
+		GameObject floor = new Floor(0, 400, SCREEN_WIDTH, 50);
+		System.out.println(floor);
+		levels.get(0).addGameObject(floor);
+		System.out.println(levels.get(0).getGameObjects());
 	}
 	
 	public static ArrayList<GameObject> getGameObjects(){

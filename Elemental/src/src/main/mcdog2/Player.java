@@ -8,12 +8,7 @@ public class Player extends GameObject{
 
 	
 	public Player(int x, int y, int width, int height, Image image){
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-		this.image = image;
-		System.out.println(image);
+		super(x, y, width, height, image);
 	}
 	
 	
@@ -35,11 +30,14 @@ public class Player extends GameObject{
 	
 	private GameObject checkForCollision(ArrayList<GameObject> gameObjects){
 		for(GameObject e : gameObjects){
-			if(this.intersects(e.getX(), e.getY(), e.getWidth(), e.getHeight())){
+			System.out.println(e);
+			if(this.intersects(e)){
 				return e;
 			}
 		}
 		return null;
 	}
+
+
 
 }

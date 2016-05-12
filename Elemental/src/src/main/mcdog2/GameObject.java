@@ -5,12 +5,25 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Shape;
 
-public abstract class GameObject extends Rectangle{
+public abstract class GameObject{
 	int x, y;
 	int width, height;
 	Image image;
 	
+	public GameObject(int x, int y, int width, int height){
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+	}
 	
+	public GameObject(int x, int y, int width, int height, Image image){
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		this.image = image;
+	}
 	//Abstract methods
 	public abstract void draw(Graphics g);
 	public abstract void update();
@@ -27,6 +40,15 @@ public abstract class GameObject extends Rectangle{
 	public void setWidth(int width){this.width = width;}
 	public void setHeight(int height){this.height = height;}
 	
+	public Rectangle getBounds(){
+		return new Rectangle(x, y, width, height);
+	}
+	public boolean intersects(GameObject other){
+		if(this.getBounds().intersects(other.getBounds())){
+			return true;
+		}
+		return false;
+	}
 
 
 }

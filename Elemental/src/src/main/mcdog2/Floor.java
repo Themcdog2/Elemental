@@ -5,10 +5,7 @@ import java.awt.Graphics;
 public class Floor extends GameObject{
 
 	public Floor(int x, int y, int width, int height) {
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
+		super(x, y, width, height);
 		// TODO Auto-generated constructor stub
 	}
 
