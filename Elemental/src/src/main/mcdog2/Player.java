@@ -22,19 +22,21 @@ public class Player extends GameObject{
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		if(checkForCollision(Main.levels.get(0).getGameObjects()) == null){
+		if(checkForCollision(Main.levels.get(Main.currentLevel).getGameObjects()) == null){
 			y++;
+			
 		}
 		
 	}
 	
 	private GameObject checkForCollision(ArrayList<GameObject> gameObjects){
+
 		for(GameObject e : gameObjects){
-			System.out.println(e);
-			if(this.intersects(e)){
+			if(this.intersects(e) && !(this.equals(e))){
 				return e;
 			}
 		}
+		
 		return null;
 	}
 

@@ -22,6 +22,9 @@ public class Main {
 	static public ArrayList<Level> levels;
 	
 	
+	static int currentLevel = 0;
+	
+	
 	
 	
 	public static void main(String[] args) {
@@ -33,15 +36,17 @@ public class Main {
 	
 	private static void init(){
 		frame = new SkeletonFrame();
-		Player p = new Player(0, 0, 50, 50, Toolkit.getDefaultToolkit().getImage("tempstick.jpg"));
-		addGameObject(p);
 		GameLoop gl = new GameLoop();
 		levels = new ArrayList<Level>();
+	}
+	
+	public static void initLevels(){
 		levels.add(new Level("Test level"));
 		GameObject floor = new Floor(0, 400, SCREEN_WIDTH, 50);
-		System.out.println(floor);
-		levels.get(0).addGameObject(floor);
-		System.out.println(levels.get(0).getGameObjects());
+		levels.get(currentLevel).addGameObject(floor);
+		//System.out.println(levels.get(currentLevel).getGameObjects());
+		Player p = new Player(0, 0, 50, 50, Toolkit.getDefaultToolkit().getImage("tempstick.jpg"));
+		levels.get(currentLevel).addGameObject(p);
 	}
 	
 	public static ArrayList<GameObject> getGameObjects(){

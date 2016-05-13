@@ -1,5 +1,4 @@
 package src.main.mcdog2;
-
 import java.awt.Graphics;
 import java.util.ArrayList;
 

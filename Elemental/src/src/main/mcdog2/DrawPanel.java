@@ -7,12 +7,13 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
-public class DrawPanel extends JPanel implements MouseListener{
+public class DrawPanel extends JPanel{
 	
 	static MainMenu mainmenu;
 	public DrawPanel(){
 		mainmenu = new MainMenu(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
-		this.addMouseListener(this);
+		this.addMouseListener(new MouseHandler());
+		
 	}
 	
 	public static void requestResize(){
@@ -21,10 +22,6 @@ public class DrawPanel extends JPanel implements MouseListener{
 	
 	@Override
 	public void paint(Graphics g){
-		for(int i = 0; i < Main.getGameObjects().size(); i++){
-			Main.getGameObjects().get(i).draw(g);
-		}
-		
 		if(Main.state == State.MAINMENU){
 		mainmenu.drawMenu(g);
 		}else{
@@ -34,42 +31,12 @@ public class DrawPanel extends JPanel implements MouseListener{
 		}
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		checkMainMenuClicks(e.getPoint());
-		
-		
-	}
 
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		checkMainMenuClicks(e.getPoint());
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	private void checkMainMenuClicks(Point p){
 		if(mainmenu.buttonClicked(p, "startButton")){
 			mainmenu.setHidden(true);
 			Main.state = State.LEVELSELECT;
+			Main.initLevels();
 		}
 		if(mainmenu.buttonClicked(p, "optionButton")){
 			Main.state = State.OPTIONMENU;
@@ -80,5 +47,43 @@ public class DrawPanel extends JPanel implements MouseListener{
 		}
 	
 	}
+	
+	class MouseHandler implements MouseListener{
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			checkMainMenuClicks(e.getPoint());
+			System.out.println("click");
+			
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			//checkMainMenuClicks(e.getPoint());
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
 
 }
+
+

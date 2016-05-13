@@ -60,9 +60,13 @@ public class GameLoop implements Runnable{
 	}
 	
 	private void tick(){
+	
+			for(Level e : Main.levels){
+				for(GameObject j : e.getGameObjects()){
+					j.update();
+				}
 		
-		for(int i = 0; i < Main.getGameObjects().size(); i++){
-			Main.getGameObjects().get(i).update();
+			
 		}
 	}
 
