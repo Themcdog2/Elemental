@@ -9,6 +9,7 @@ public abstract class GameObject{
 	int x, y;
 	int width, height;
 	Image image;
+	Rectangle collisionBox;
 	
 	public GameObject(int x, int y, int width, int height){
 		this.x = x;
@@ -43,6 +44,9 @@ public abstract class GameObject{
 	public Rectangle getBounds(){
 		return new Rectangle(x, y, width, height);
 	}
+	
+	
+	
 	public boolean intersects(GameObject other){
 		if(this.getBounds().intersects(other.getBounds())){
 			return true;

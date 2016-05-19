@@ -1,7 +1,11 @@
 package src.main.mcdog2;
 
+import java.awt.AWTEvent;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.AWTEventListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -10,10 +14,15 @@ import javax.swing.JPanel;
 public class DrawPanel extends JPanel{
 	
 	static MainMenu mainmenu;
+	
+	static boolean keysPressed[] = new boolean[5];
+	
 	public DrawPanel(){
 		mainmenu = new MainMenu(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 		this.addMouseListener(new MouseHandler());
-		
+		 this.getToolkit().addAWTEventListener(new keyHandler(), AWTEvent.KEY_EVENT_MASK);
+		setFocusable(true);
+		requestFocus();
 	}
 	
 	public static void requestResize(){
@@ -83,7 +92,50 @@ public class DrawPanel extends JPanel{
 		}
 		
 	}
+	
+	class keyHandler implements AWTEventListener{
+		
+		@Override
+		  public void eventDispatched(AWTEvent event) {
+		    if(event instanceof KeyEvent){
+		      KeyEvent key = (KeyEvent)event;
+		      if(key.getID()==KeyEvent.KEY_PRESSED){ //Handle key presses
+		        System.out.println(key.getKeyChar());
+		        if(key.getKeyChar() == 'w'){
+		        	keysPressed[0] = true;
+		        }
+		        if(key.getKeyChar() == 'a'){
+		        	keysPressed[1] = true;
+		        }
+		        if(key.getKeyChar() == 's'){
+		        	keysPressed[2] = true;
+		        }
+		        if(key.getKeyChar() == 'd'){
+		        	keysPressed[3] = true;
+		        }
+		        key.consume();
+		      } else if(key.getID() == KeyEvent.KEY_RELEASED){
+		    	  System.out.println("released");
+		    	  System.out.println(key.getKeyChar());
+		    	  if(key.getKeyChar() == 'w'){
+			        	keysPressed[0] = false;
+			        }
+			        if(key.getKeyChar() == 'a'){
+			        	keysPressed[1] = false;
+			        }
+			        if(key.getKeyChar() == 's'){
+			        	keysPressed[2] = false;
+			        }
+			        if(key.getKeyChar() == 'd'){
+			        	keysPressed[3] = false;
+			        }
+			        key.consume();
+		      }
+		    }
+		  }
 
+		
+	}
 }
 
 

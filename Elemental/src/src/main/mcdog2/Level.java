@@ -6,6 +6,8 @@ public class Level {
 	
 	private String levelID;
 	private ArrayList<GameObject> gameObjects;
+	private ArrayList<Tile> tiles;
+	
 	
 	public Level(String levelID) {
 		this.levelID = levelID;
@@ -33,10 +35,21 @@ public class Level {
 	}
 
 	public void renderObjects(Graphics g) {
+		
+		for(Tile e : tiles){
+			e.draw(g);
+		}
 		for(GameObject e : gameObjects){
 			e.draw(g);
 		}
 		
+	}
+	public ArrayList<Tile> getTiles() {
+		return tiles;
+	}
+
+	public void setTiles(ArrayList<Tile> tiles) {
+		this.tiles = tiles;
 	}
 	
 
