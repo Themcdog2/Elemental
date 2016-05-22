@@ -6,14 +6,18 @@ import java.util.ArrayList;
 
 public class Player extends GameObject{
 	
-	
-	float dx = 0;
-	float dy = 0;
+	Vector2D position = new Vector2D(x, y);
+	Vector2D velocity = new Vector2D(0.0, 0.0);
 	float jumpVelocity;
+	
+	boolean jumping;
 
 	
 	public Player(int x, int y, int width, int height, Image image){
 		super(x, y, width, height, image);
+		loadAnimation("runRight", "run", ".gif", 9);
+		cycleAnimation(animation);
+		update();
 	}
 	
 	
@@ -26,59 +30,90 @@ public class Player extends GameObject{
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+	//System.out.println(checkForCollision(Main.currentLevelObject.getGameObjects()));
 		
-		
-		if(DrawPanel.keysPressed[3] == true){
-			//System.out.println(DrawPanel.keysPressed[3]);
-			dx +=0.5;
-		}else{
-			if(dx > 0){
-				dx--;
-			}
+		//If we are not colliding with anything, apply gravity
+		if((checkForCollision(Main.currentLevelObject.getGameObjects()) == null)){
+			velocity = velocity.add(new Vector2D(0.0, 1.0));
 		}
 		
-		if(DrawPanel.keysPressed[1] == true){
-			//System.out.println(DrawPanel.keysPressed[3]);
-			dx -=0.5;
-		}else{
-			if(dx < 0){
-				dx++;
-			}
+		// W
+		if (DrawPanel.keysPressed[0]) {
+			velocity = velocity.add(new Vector2D(0.0, -20.0));
+			DrawPanel.keysPressed[0] = false;
+			jumping = true;
 		}
-		
-		if(checkForCollision(Main.levels.get(Main.currentLevel).getGameObjects()) == null){
-			dy++;
-			dy *= 0.5;
+
+		// A
+		if (DrawPanel.keysPressed[1]) {
+			velocity = velocity.add(new Vector2D(-1.0, 0.0));
 			
-		}else{
-			//dy=0;
+		}
+
+		// S
+		if (DrawPanel.keysPressed[2]) {
+			velocity = velocity.add(new Vector2D(0.0, 0.0));
+		}
+
+		// D
+		if (DrawPanel.keysPressed[3]) {
+			velocity = velocity.add(new Vector2D(1.0, 0.0));
+			setAnimating(true);
 		}
 		
+		if(DrawPanel.keysPressed[0] == false && DrawPanel.keysPressed[1] == false && DrawPanel.keysPressed[2] == false && DrawPanel.keysPressed[3] == false){
+			setAnimating(false);
+		}
+		
+		
+		
+		
+		
+		
+		
+		//Finished logic, now step X.
+	if(velocity.dX > 0){
+		for(int i = 0; i < velocity.dX; i+=1){
+				x+=1;		
+				//Friction
+					velocity = velocity.add(new Vector2D(-0.1, 0.0));
+
+	}
+}
+	
+	if(velocity.dX < 0){
+		for(int i = 0; i > velocity.dX; i-=1){
+				x-=1;
+				//Friction
+					velocity = velocity.add(new Vector2D(0.1, 0.0));
+		}
+	}
+	
 		//Step y
-		 
-		if (dy > 0) {
-			for (int ystep = 0; ystep < dy; ystep++) {
-				if(checkForCollision(Main.levels.get(Main.currentLevel).getGameObjects()) == null){
-				y++;
-				}
+	if(velocity.dY > 0){
+		for(int i = 0; i < velocity.dY; i+=1){
+			if((checkForCollision(Main.currentLevelObject.getGameObjects()) == null)){
+				y+=1;
+			}else{
+				velocity.dY = 0;
 			}
-			dy = 0;
 		}
-		
-		if (dy < 0) {
-			for (int ystep = 0; ystep < dy; ystep++) {
-				if(checkForCollision(Main.levels.get(Main.currentLevel).getGameObjects()) == null){
-					y--;
-					}
+	}
+	
+	if(velocity.dY < 0){
+		for(int i = 0; i > velocity.dY; i-=1){
+			if((checkForCollision(Main.currentLevelObject.getGameObjects()) == null) || jumping){
+				y-=1;
+			}else{
+				velocity.dY = 0;
 			}
-			dy = 0;
 		}
-		
-		x +=dx;
-		
+	}
 		
 		
+		//x = (int)position.dX;
+		//y = (int)position.dY;
+		System.out.println(velocity  + " " + position);
 		
 		
 		

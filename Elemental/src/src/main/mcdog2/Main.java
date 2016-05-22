@@ -26,11 +26,11 @@ public class Main {
 	static State state = State.MAINMENU;
 	static private ArrayList<GameObject> obj;
 	static public ArrayList<Level> levels;
+	static Level currentLevelObject;
 	
 	
-	
+
 	static int currentLevel = 0;
-	
 	
 	
 	
@@ -45,6 +45,7 @@ public class Main {
 		frame = new SkeletonFrame();
 		GameLoop gl = new GameLoop();
 		levels = new ArrayList<Level>();
+		currentLevelObject = new Level("Hey");
 	}
 	
 	public static void initLevels(){
@@ -52,7 +53,7 @@ public class Main {
 		GameObject floor = new Floor(0, 400, SCREEN_WIDTH, 50);
 		levels.get(currentLevel).addGameObject(floor);
 		//System.out.println(levels.get(currentLevel).getGameObjects());
-		Player p = new Player(0, 0, 50, 50, Toolkit.getDefaultToolkit().getImage("tempstick.jpg"));
+		Player p = new Player(0, 0, 45, 60, Toolkit.getDefaultToolkit().getImage("standing.jpg"));
 		levels.get(currentLevel).addGameObject(p);
 		
 		Image tempImage = Toolkit.getDefaultToolkit().getImage("eg_hieropole1.png");
@@ -63,7 +64,9 @@ public class Main {
 			}
 		}
 		levels.get(currentLevel).setTiles(tempTiles);
+		currentLevelObject = levels.get(currentLevel);
 		}
+		
 	
 	public static ArrayList<GameObject> getGameObjects(){
 		return obj;

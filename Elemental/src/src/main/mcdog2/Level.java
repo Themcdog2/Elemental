@@ -1,5 +1,7 @@
 package src.main.mcdog2;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.util.ArrayList;
 
 public class Level {
@@ -35,6 +37,8 @@ public class Level {
 	}
 
 	public void renderObjects(Graphics g) {
+		g.setColor(Color.white);
+		g.fillRect(0, 0, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 		
 		for(Tile e : tiles){
 			e.draw(g);
@@ -51,6 +55,21 @@ public class Level {
 	public void setTiles(ArrayList<Tile> tiles) {
 		this.tiles = tiles;
 	}
+	
+	public Tile getTileAt(int tileX, int tileY){
+	if(tiles != null){
+		for(int i = 0; i < tiles.size(); i++){
+			if(tiles.get(i).tileX == tileX && tiles.get(i).tileX == tileY){
+				return tiles.get(i);
+			}
+		}
+		return null;
+	}
+	return null;
+}
+	
+
+	
 	
 
 }

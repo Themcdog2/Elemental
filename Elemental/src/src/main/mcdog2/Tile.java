@@ -26,7 +26,63 @@ public class Tile {
 	}
 	
 	public void draw(Graphics g){
-		g.drawImage(i, x, y, size, size, null);
+		//g.drawImage(i, x, y, size, size, null);
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public int getTileX() {
+		return tileX;
+	}
+
+	public int getTileY() {
+		return tileY;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public Image getImage() {
+		return i;
+	}
+
+	public boolean isEmpty() {
+		return isEmpty;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public void setTileX(int tileX) {
+		this.tileX = tileX;
+	}
+
+	public void setTileY(int tileY) {
+		this.tileY = tileY;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	public void setImage(Image i) {
+		this.i = i;
+	}
+
+	public void setEmpty(boolean isEmpty) {
+		this.isEmpty = isEmpty;
 	}
 	
 

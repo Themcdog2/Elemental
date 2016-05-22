@@ -1,5 +1,6 @@
 package src.main.mcdog2;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Floor extends GameObject{
@@ -12,6 +13,7 @@ public class Floor extends GameObject{
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
+		g.setColor(Color.black);
 		g.fillRect(x, y, width, height);
 		
 	}
