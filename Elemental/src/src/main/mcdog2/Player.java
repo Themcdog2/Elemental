@@ -9,14 +9,18 @@ public class Player extends GameObject{
 	Vector2D position = new Vector2D(x, y);
 	Vector2D velocity = new Vector2D(0.0, 0.0);
 	float jumpVelocity;
-	
 	boolean jumping;
+	
+	ArrayList<Image> animationLeft;
+	ArrayList<Image> animationRight;
 
 	
 	public Player(int x, int y, int width, int height, Image image){
 		super(x, y, width, height, image);
-		loadAnimation("runRight", "run", ".gif", 9);
-		cycleAnimation(animation);
+		animationRight = loadAnimation("runRight", "run", ".gif", 9);
+		animationLeft = loadAnimation("runLeft", "run", ".gif", 9);
+		setCurrentAnimation(animationRight);
+		cycleAnimation();
 		update();
 	}
 	
@@ -48,6 +52,10 @@ public class Player extends GameObject{
 		if (DrawPanel.keysPressed[1]) {
 			velocity = velocity.add(new Vector2D(-1.0, 0.0));
 			
+			setCurrentAnimation(animationLeft);
+			setAnimating(true);
+			
+			
 		}
 
 		// S
@@ -58,6 +66,8 @@ public class Player extends GameObject{
 		// D
 		if (DrawPanel.keysPressed[3]) {
 			velocity = velocity.add(new Vector2D(1.0, 0.0));
+			
+			setCurrentAnimation(animationRight);
 			setAnimating(true);
 		}
 		
@@ -114,7 +124,11 @@ public class Player extends GameObject{
 		//x = (int)position.dX;
 		//y = (int)position.dY;
 		System.out.println(velocity  + " " + position);
-		
+		if(this.x > Main.SCREEN_WIDTH){
+			this.x = 0;
+		}
+			
+			
 		
 		
 	}

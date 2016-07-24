@@ -23,6 +23,8 @@ public abstract class GameObject{
 	private boolean animating;
 	private Image defaultImage;
 	
+	ArrayList<Image> currentAnimation;
+	
 
 
 
@@ -75,16 +77,27 @@ public abstract class GameObject{
 	}
 
 	
-	public void loadAnimation(String directory, String name, String type, int frames){
+	public ArrayList<Image> loadAnimation(String directory, String name, String type, int frames){
 		animation = new ArrayList<Image>();
 		System.out.println(directory + "/" + name + " (" + frames + ")" + type);
 		for(int i = 1; i <= frames; i++){
 			animation.add(Toolkit.getDefaultToolkit().getImage(directory + "/" + name + " (" + i + ")" + type));
 		}
+		return animation;
 	}
 	
 	
-	public void cycleAnimation(ArrayList<Image> images){
+	public ArrayList<Image> getCurrentAnimation() {
+		return currentAnimation;
+	}
+
+	public void setCurrentAnimation(ArrayList<Image> currentAnimation) {
+		this.currentAnimation = currentAnimation;
+	}
+
+	public void cycleAnimation(){
+		
+		
 		Timer t = new Timer();
 		t.scheduleAtFixedRate(new TimerTask() {
 			
@@ -93,12 +106,14 @@ public abstract class GameObject{
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
+				ArrayList<Image> images = currentAnimation;
 				if(animationStep < images.size()){
 					if(animating){
 						setImage(images.get(animationStep));
 						animationStep++;
 					}else{
 						setImage(defaultImage);
+						
 					}
 				}else{
 					animationStep = 0;
